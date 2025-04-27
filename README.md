@@ -1,6 +1,9 @@
 # DataUnits
 DataUnits allows easier handling of byte size representation. (Bytes, KB, MB, GB, TB)
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![NuGet](https://img.shields.io/nuget/v/DataUnits.svg?style=flat-square)](https://www.nuget.org/packages/DataUnits/)
+
 ## How to use it
 
 You can create a `ByteSize` object from Bits, Bytes, Kilobytes, Megabytes, Gigabytes and Terabytes.
