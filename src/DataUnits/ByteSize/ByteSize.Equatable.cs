@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace DataUnits;
+﻿namespace DataUnits;
 
 public partial struct ByteSize : IEquatable<ByteSize>
 {

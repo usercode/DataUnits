@@ -18,6 +18,11 @@ public partial struct ByteSize :
         return byteSize.Bytes;
     }
 
+    public static implicit operator ByteSize(long bytes)
+    {
+        return ByteSize.FromBytes(bytes);
+    }
+
     public static bool operator ==(ByteSize left, ByteSize right)
     {
         return left.Equals(right);
