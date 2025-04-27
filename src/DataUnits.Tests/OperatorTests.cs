@@ -7,19 +7,19 @@ public class OperatorTests
     [Fact]
     public void ImplicitCast()
     {
-        Assert.Equal(123L, ByteSize.FromBytes(123));
+        Assert.Equal(123, ByteSize.FromBytes(123));
     }
 
     [Fact]
     public void Add()
     {
-        Assert.Equal(2L, ByteSize.FromBytes(1) + ByteSize.FromBytes(1));
+        Assert.Equal(2, ByteSize.FromBytes(1) + ByteSize.FromBytes(1));
     }
 
     [Fact]
     public void Subtract()
     {
-        Assert.Equal(2L, ByteSize.FromBytes(3) - ByteSize.FromBytes(1));
+        Assert.Equal(2, ByteSize.FromBytes(3) - ByteSize.FromBytes(1));
     }
 
     [Fact]

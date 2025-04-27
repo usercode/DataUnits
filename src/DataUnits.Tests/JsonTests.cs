@@ -8,11 +8,24 @@ public class JsonTests
     [Fact]
     public void Serialize()
     {
-        string json = JsonSerializer.Serialize(ByteSize.FromMegabytes(123));
+        string json = JsonSerializer.Serialize(ByteSize.FromKilobytes(1));
 
-        ByteSize result = JsonSerializer.Deserialize<ByteSize>(json);
+        Assert.Equal("1024", json);
+    }
 
-        Assert.Equal("\"123 MB\"", json);
-        Assert.Equal(123, result.Megabytes);
+    [Fact]
+    public void Deserialize()
+    {
+        ByteSize result = JsonSerializer.Deserialize<ByteSize>("1024");
+
+        Assert.Equal(1, result.Kilobytes);
+    }
+
+    [Fact]
+    public void DeserializeFormattedValue()
+    {
+        ByteSize result = JsonSerializer.Deserialize<ByteSize>("\"1.5 KB\"");
+
+        Assert.Equal(1.5, result.Kilobytes);
     }
 }

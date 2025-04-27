@@ -46,10 +46,35 @@ public readonly partial struct ByteSize
         return new ByteSize(Bytes + value.Bytes);
     }
 
+    public ByteSize AddBytes(long value)
+    {
+        return Add(ByteSize.FromBytes(value));
+    }
+
+    public ByteSize AddKilobytes(long value)
+    {
+        return Add(ByteSize.FromKilobytes(value));
+    }
+
+    public ByteSize AddMegabytes(long value)
+    {
+        return Add(ByteSize.FromMegabytes(value));
+    }
+
+    public ByteSize AddGigabytes(long value)
+    {
+        return Add(ByteSize.FromGigabytes(value));
+    }
+
+    public ByteSize AddTerabytes(long value)
+    {
+        return Add(ByteSize.FromTerabytes(value));
+    }
+
     public ByteSize Subtract(ByteSize value)
     {
         return new ByteSize(Bytes - value.Bytes);
-    }    
+    }
 
     public override bool Equals([NotNullWhen(true)] object? obj)
     {

@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace DataUnits
@@ -7,12 +8,24 @@ namespace DataUnits
     {
         public override ByteSize Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return ByteSize.Parse(reader.GetString());
+            if (reader.TokenType == JsonTokenType.Number && reader.TryGetInt64(out long bytesValue))
+            {
+                return ByteSize.FromBytes(bytesValue);
+            }
+
+            if (reader.TokenType == JsonTokenType.String)
+            {
+                string? value = reader.GetString();
+
+                return ByteSize.Parse(value, CultureInfo.InvariantCulture);
+            }
+
+            throw new ArgumentException();
         }
 
         public override void Write(Utf8JsonWriter writer, ByteSize value, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(value.ToString());
+            writer.WriteNumberValue(value.Bytes);
         }
     }
 }
