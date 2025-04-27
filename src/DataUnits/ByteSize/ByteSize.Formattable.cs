@@ -37,6 +37,11 @@ public partial struct ByteSize : IFormattable
         return ToString(null, format, formatProvider);
     }
 
+    public string ToString(IFormatProvider? formatProvider)
+    {
+        return ToString(null, null, formatProvider);
+    }
+
     public override string ToString()
     {
         return ToString(null, null, null);

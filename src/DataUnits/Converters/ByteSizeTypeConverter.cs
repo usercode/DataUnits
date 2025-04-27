@@ -15,7 +15,7 @@ internal class ByteSizeTypeConverter : TypeConverter
     {
         if (value is string stringValue)
         {
-            return ByteSize.Parse(stringValue);
+            return ByteSize.Parse(stringValue, culture);
         }
 
         throw new Exception();
@@ -30,7 +30,7 @@ internal class ByteSizeTypeConverter : TypeConverter
     {
         if (value is ByteSize sizeValue)
         {
-            return sizeValue.ToString();
+            return sizeValue.ToString(culture);
         }
 
         throw new Exception();
