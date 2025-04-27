@@ -17,7 +17,7 @@ public partial struct ByteSize : IFormattable
                 unit = ByteUnit.All[i];
                 double v = value / unit.NumberOfBytes;
 
-                if (v < ByteUnit.UnitSize)
+                if (Math.Abs(v) < ByteUnit.UnitSize)
                 {
                     value = v;
                     break;
