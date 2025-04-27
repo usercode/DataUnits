@@ -1,0 +1,24 @@
+name: .NET Core
+
+on: 
+  release:
+    types:
+      - published
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 8.0.x
+    - name: Build with dotnet
+      run: dotnet build -c Release "./src/DataUnits.sln"
+    - name: Run unit tests
+      run: dotnet test "./src/DataUnits.sln"
+    - name: Create the package
+      run: dotnet pack -c Release "./src/DataUnits.sln"
+    - name: Publish "DataUnits" to nuget
+      run: dotnet nuget push "./src/DataUnits/bin/Release/*.nupkg" -s "https://api.nuget.org/v3/index.json" -k ${{secrets.NUGET_API_KEY}}
