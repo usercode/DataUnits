@@ -11,7 +11,7 @@ namespace DataUnits;
 [TypeConverter(typeof(ByteSizeTypeConverter))]
 public readonly partial struct ByteSize
 {
-    public ByteSize(long bytes)
+    private ByteSize(long bytes)
     {
         Bytes = bytes;
     }
