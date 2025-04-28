@@ -1,8 +1,5 @@
 ﻿namespace DataUnits;
 
-/// <summary>
-/// ByteSize
-/// </summary>
 public partial struct ByteSize
 {
     public static ByteSize From(double value, ByteUnit unit)

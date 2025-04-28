@@ -1,7 +1,7 @@
 ﻿namespace DataUnits;
 
 /// <summary>
-/// ByteUnit
+/// Unit for byte size.
 /// </summary>
 public class ByteUnit
 {

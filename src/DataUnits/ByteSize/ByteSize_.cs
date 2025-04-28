@@ -74,17 +74,7 @@ public readonly partial struct ByteSize
     public ByteSize Subtract(ByteSize value)
     {
         return new ByteSize(Bytes - value.Bytes);
-    }
-
-    public override bool Equals([NotNullWhen(true)] object? obj)
-    {
-        if (obj is ByteSize byteSize)
-        {
-            return Equals(byteSize);
-        }
-
-        return false;
-    }
+    }   
 
     public override int GetHashCode()
     {

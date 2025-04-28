@@ -2,9 +2,6 @@
 
 namespace DataUnits;
 
-/// <summary>
-/// ByteSize
-/// </summary>
 public partial struct ByteSize : 
                                     IEqualityOperators<ByteSize, ByteSize, bool>, 
                                     IAdditionOperators<ByteSize, ByteSize, ByteSize>, 
@@ -71,5 +68,15 @@ public partial struct ByteSize :
     public static ByteSize operator *(ByteSize left, double factor)
     {
         return new ByteSize((long)(left.Bytes * factor));
-    }    
+    }
+
+    public static BitRate operator /(ByteSize size, TimeSpan time)
+    {
+        return BitRate.FromBits((long)(size.Bytes * 8 / time.TotalSeconds));
+    }
+
+    public static TimeSpan operator /(ByteSize size, BitRate rate)
+    {
+        return TimeSpan.FromSeconds((double)size.Bytes * 8 / rate.BitsPerSecond);
+    }
 }
