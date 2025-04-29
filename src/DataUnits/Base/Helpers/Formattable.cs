@@ -17,7 +17,7 @@ internal static class Formattable
             for (int i = 0; i < TUnit.All.Length; i++)
             {
                 unit = TUnit.All[i];
-                double v = current / unit.NumberOfLowestElements;
+                double v = current / unit.NumberOfLowestValue;
 
                 if (Math.Abs(v) < TUnit.UnitSize)
                 {
@@ -28,7 +28,7 @@ internal static class Formattable
         }
         else
         {
-            current /= unit.NumberOfLowestElements;
+            current /= unit.NumberOfLowestValue;
         }
 
         return $"{current.ToString(format, formatProvider)} {unit.Symbol}";

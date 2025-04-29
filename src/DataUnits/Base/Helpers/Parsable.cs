@@ -44,7 +44,7 @@ internal static class Parsable
             return false;
         }
 
-        current *= unit.NumberOfLowestElements;
+        current *= unit.NumberOfLowestValue;
 
         value = TValue.Create((long)current);
 
