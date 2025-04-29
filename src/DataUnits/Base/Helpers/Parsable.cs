@@ -5,13 +5,13 @@ namespace DataUnits.Base;
 
 internal static class Parsable
 {
-    public static bool TryParse<TElement, TUnit>(Regex regex, [NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out TElement result)
-        where TElement : struct, IElement<TElement, TUnit>
+    public static bool TryParse<TValue, TUnit>(Regex regex, [NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out TValue value)
+        where TValue : struct, IValue<TValue, TUnit>
         where TUnit : IUnit<TUnit>
     {
         if (s == null)
         {
-            result = new TElement();
+            value = new TValue();
 
             return false;
         }
@@ -20,14 +20,14 @@ internal static class Parsable
 
         if (match.Success == false)
         {
-            result = new TElement();
+            value = new TValue();
 
             return false;
         }
 
-        if (double.TryParse(match.Groups["value"].Value, provider, out double value) == false)
+        if (double.TryParse(match.Groups["value"].Value, provider, out double current) == false)
         {
-            result = new TElement();
+            value = new TValue();
 
             return false;
         }
@@ -35,17 +35,18 @@ internal static class Parsable
         string symbol = match.Groups["symbol"].Value;
 
         //calculate value
-        for (int i = 0; i < TUnit.All.Length; i++)
-        {
-            if (string.Equals(symbol, TUnit.All[i].Symbol, StringComparison.OrdinalIgnoreCase))
-            {
-                value *= TUnit.All[i].NumberOfLowestElements;
+        TUnit? unit = TUnit.All.FirstOrDefault(x => string.Equals(symbol, x.Symbol, StringComparison.OrdinalIgnoreCase));
 
-                break;
-            }
+        if (unit == null)
+        {
+            value = new TValue();
+
+            return false;
         }
 
-        result = TElement.Create((long)value);
+        current *= unit.NumberOfLowestElements;
+
+        value = TValue.Create((long)current);
 
         return true;
     }

@@ -9,16 +9,16 @@ namespace DataUnits;
 /// </summary>
 [JsonConverter(typeof(GenericJsonConverter<ByteSize>))]
 [TypeConverter(typeof(GenericTypeConverter<ByteSize>))]
-public readonly partial struct ByteSize : IElement<ByteSize, ByteUnit>
+public readonly partial struct ByteSize : IValue<ByteSize, ByteUnit>
 {
     private ByteSize(long bytes)
     {
         Bytes = bytes;
     }
 
-    long IElement<ByteSize>.Value => Bytes;
+    long IValue<ByteSize>.Value => Bytes;
 
-    static ByteSize IElement<ByteSize>.Create(long value) => new ByteSize(value);
+    static ByteSize IValue<ByteSize>.Create(long value) => new ByteSize(value);
     
     /// <summary>
     /// Gets the number of bytes.

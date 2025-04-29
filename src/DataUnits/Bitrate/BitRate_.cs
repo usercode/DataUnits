@@ -9,16 +9,16 @@ namespace DataUnits;
 /// </summary>
 [JsonConverter(typeof(GenericJsonConverter<BitRate>))]
 [TypeConverter(typeof(GenericTypeConverter<BitRate>))]
-public readonly partial struct BitRate : IElement<BitRate, BitUnit>
+public readonly partial struct BitRate : IValue<BitRate, BitUnit>
 {
     private BitRate(long bitsPerSecond)
     {
         BitsPerSecond = bitsPerSecond;
     }
 
-    long IElement<BitRate>.Value => BitsPerSecond;
+    long IValue<BitRate>.Value => BitsPerSecond;
 
-    static BitRate IElement<BitRate>.Create(long value) => new BitRate(value);
+    static BitRate IValue<BitRate>.Create(long value) => new BitRate(value);
     
     /// <summary>
     /// Bits per seconds.

@@ -5,8 +5,8 @@ using System.Globalization;
 
 namespace DataUnits;
 
-internal class GenericTypeConverter<TElement> : TypeConverter
-    where TElement : struct, IElement<TElement>
+internal class GenericTypeConverter<TValue> : TypeConverter
+    where TValue : struct, IValue<TValue>
 {
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
     {
@@ -17,7 +17,7 @@ internal class GenericTypeConverter<TElement> : TypeConverter
     {
         if (value is string stringValue)
         {
-            if (TElement.TryParse(stringValue, culture, out TElement result))
+            if (TValue.TryParse(stringValue, culture, out TValue result))
             {
                 return result;
             }
@@ -33,7 +33,7 @@ internal class GenericTypeConverter<TElement> : TypeConverter
 
     public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
-        if (value is TElement sizeValue)
+        if (value is TValue sizeValue)
         {
             return sizeValue.ToString(null, culture);
         }

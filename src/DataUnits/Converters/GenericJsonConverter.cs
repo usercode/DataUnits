@@ -5,21 +5,21 @@ using System.Text.Json.Serialization;
 
 namespace DataUnits;
 
-internal class GenericJsonConverter<TElement> : JsonConverter<TElement>
-    where TElement : struct, IElement<TElement>
+internal class GenericJsonConverter<TValue> : JsonConverter<TValue>
+    where TValue : struct, IValue<TValue>
 {
-    public override TElement Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType == JsonTokenType.Number && reader.TryGetInt64(out long bytesValue))
         {
-            return TElement.Create(bytesValue);
+            return TValue.Create(bytesValue);
         }
 
         if (reader.TokenType == JsonTokenType.String)
         {
             string? value = reader.GetString();
 
-            if (TElement.TryParse(value, CultureInfo.InvariantCulture, out TElement result))
+            if (TValue.TryParse(value, CultureInfo.InvariantCulture, out TValue result))
             {
                 return result;
             }
@@ -28,7 +28,7 @@ internal class GenericJsonConverter<TElement> : JsonConverter<TElement>
         throw new ArgumentException();
     }
 
-    public override void Write(Utf8JsonWriter writer, TElement value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, TValue value, JsonSerializerOptions options)
     {
         writer.WriteNumberValue(value.Value);
     }

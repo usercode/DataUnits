@@ -2,13 +2,13 @@
 
 internal static class Formattable
 {
-    public static string ToString<TElement, TUnit>(TElement element, TUnit? unit, string? format = null, IFormatProvider? formatProvider = null)
-        where TElement : struct, IElement<TElement, TUnit>
+    public static string ToString<TValue, TUnit>(TValue value, TUnit? unit, string? format = null, IFormatProvider? formatProvider = null)
+        where TValue : struct, IValue<TValue, TUnit>
         where TUnit : IUnit<TUnit>
     {
         format ??= "0.###";
 
-        double value = element.Value;
+        double current = value.Value;
 
         if (unit == null)
         {
@@ -17,20 +17,20 @@ internal static class Formattable
             for (int i = 0; i < TUnit.All.Length; i++)
             {
                 unit = TUnit.All[i];
-                double v = value / unit.NumberOfLowestElements;
+                double v = current / unit.NumberOfLowestElements;
 
                 if (Math.Abs(v) < TUnit.UnitSize)
                 {
-                    value = v;
+                    current = v;
                     break;
                 }
             }
         }
         else
         {
-            value /= unit.NumberOfLowestElements;
+            current /= unit.NumberOfLowestElements;
         }
 
-        return $"{value.ToString(format, formatProvider)} {unit.Symbol}";
+        return $"{current.ToString(format, formatProvider)} {unit.Symbol}";
     }
 }
