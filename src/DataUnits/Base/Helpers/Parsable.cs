@@ -3,9 +3,12 @@ using System.Text.RegularExpressions;
 
 namespace DataUnits.Base;
 
-internal static class Parsable
+internal static partial class Parsable
 {
-    public static bool TryParse<TValue, TUnit>(Regex regex, [NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out TValue value)
+    [GeneratedRegex(@"^\s*(?<value>-?[0-9]+(\p{P}[0-9]+)?)\s*(?<symbol>[a-z]{0,4})?\s*$", RegexOptions.IgnoreCase)]
+    private static partial Regex Regex();
+
+    public static bool TryParse<TValue, TUnit>([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out TValue value)
         where TValue : struct, IValue<TValue, TUnit>
         where TUnit : IUnit<TUnit>
     {
@@ -16,7 +19,7 @@ internal static class Parsable
             return false;
         }
 
-        Match match = regex.Match(s);
+        Match match = Regex().Match(s);
 
         if (match.Success == false)
         {
