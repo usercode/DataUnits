@@ -31,7 +31,7 @@ public class BitUnit : IUnit<BitUnit>
     /// </summary>
     public long NumberOfBits { get; }   
 
-    long IUnit<BitUnit>.NumberOfLowestElements => NumberOfBits;
+    long IUnit<BitUnit>.NumberOfLowestValue => NumberOfBits;
 
     public override string ToString()
     {

@@ -34,14 +34,22 @@ internal static class Parsable
 
         string symbol = match.Groups["symbol"].Value;
 
-        //calculate value
-        TUnit? unit = TUnit.All.FirstOrDefault(x => string.Equals(symbol, x.Symbol, StringComparison.OrdinalIgnoreCase));
+        TUnit? unit;
 
-        if (unit == null)
+        if (string.IsNullOrEmpty(symbol))
         {
-            value = new TValue();
+            unit = TUnit.All[0];
+        }
+        else
+        {
+            unit = TUnit.All.FirstOrDefault(x => string.Equals(symbol, x.Symbol, StringComparison.OrdinalIgnoreCase));
 
-            return false;
+            if (unit == null)
+            {
+                value = new TValue();
+
+                return false;
+            }
         }
 
         current *= unit.NumberOfLowestValue;

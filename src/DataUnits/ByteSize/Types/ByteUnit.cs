@@ -31,7 +31,7 @@ public class ByteUnit : IUnit<ByteUnit>
     /// </summary>
     public long NumberOfBytes { get; }
 
-    long IUnit<ByteUnit>.NumberOfLowestElements => NumberOfBytes;
+    long IUnit<ByteUnit>.NumberOfLowestValue => NumberOfBytes;
 
     public override string ToString()
     {

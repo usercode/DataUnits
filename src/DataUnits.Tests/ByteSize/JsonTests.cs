@@ -22,6 +22,14 @@ public class JsonTests
     }
 
     [Fact]
+    public void DeserializeFromString()
+    {
+        ByteSize result = JsonSerializer.Deserialize<ByteSize>("\"2048\"");
+
+        Assert.Equal(2, result.Kilobytes);
+    }
+
+    [Fact]
     public void DeserializeFormattedValue()
     {
         ByteSize result = JsonSerializer.Deserialize<ByteSize>("\"1.5 KB\"");

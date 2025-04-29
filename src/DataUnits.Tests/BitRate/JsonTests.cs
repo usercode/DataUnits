@@ -22,6 +22,14 @@ public class JsonTests
     }
 
     [Fact]
+    public void DeserializeFromString()
+    {
+        BitRate result = JsonSerializer.Deserialize<BitRate>("\"2000\"");
+
+        Assert.Equal(2, result.Kilobits);
+    }
+
+    [Fact]
     public void DeserializeFormattedValue()
     {
         BitRate result = JsonSerializer.Deserialize<BitRate>("\"1.5 Kbps\"");

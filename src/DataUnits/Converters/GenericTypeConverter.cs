@@ -23,7 +23,7 @@ internal class GenericTypeConverter<TValue> : TypeConverter
             }
         }
 
-        throw new Exception();
+        return base.ConvertFrom(context, culture, value);
     }
 
     public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
@@ -38,6 +38,6 @@ internal class GenericTypeConverter<TValue> : TypeConverter
             return sizeValue.ToString(null, culture);
         }
 
-        throw new Exception();
+        return base.ConvertTo(context, culture, value, destinationType);
     }
 }

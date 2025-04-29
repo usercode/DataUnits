@@ -6,7 +6,7 @@ namespace DataUnits;
 
 public partial struct ByteSize : IParsable<ByteSize>
 {
-    [GeneratedRegex(@"^\s*(?<value>-?[0-9]+(\p{P}[0-9]+)?)\s*(?<symbol>[a-z]{1,2})\s*$", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^\s*(?<value>-?[0-9]+(\p{P}[0-9]+)?)\s*(?<symbol>[a-z]{1,2})?\s*$", RegexOptions.IgnoreCase)]
     private static partial Regex Regex();
 
     public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? formatProvider, [MaybeNullWhen(false)] out ByteSize value)

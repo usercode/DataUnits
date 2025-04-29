@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 namespace DataUnits;
 
 /// <summary>
-/// Represents bits per seconds
+/// Represents bits per seconds.
 /// </summary>
 [JsonConverter(typeof(GenericJsonConverter<BitRate>))]
 [TypeConverter(typeof(GenericTypeConverter<BitRate>))]
