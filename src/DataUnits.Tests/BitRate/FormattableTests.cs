@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
 using Xunit;
 
-namespace DataUnits.Tests;
+namespace DataUnits.Tests.BitRates;
 
-public class BitRateToStringTests
+public class FormattableTests
 {
     [Fact]
     public void Integer()

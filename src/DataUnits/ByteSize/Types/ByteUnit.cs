@@ -1,18 +1,19 @@
-﻿namespace DataUnits;
+﻿using DataUnits.Base;
+
+namespace DataUnits;
 
 /// <summary>
 /// Unit for byte size.
 /// </summary>
-public class ByteUnit
+public class ByteUnit : IUnit<ByteUnit>
 {
-    public const long UnitSize = 1024;
+    public static long UnitSize { get; } = 1024;
     public static ByteUnit Byte { get; } = new ByteUnit("B", 1);
     public static ByteUnit Kilobyte { get; } = new ByteUnit("KB", UnitSize);
     public static ByteUnit Megabyte { get; } = new ByteUnit("MB", UnitSize * UnitSize);
     public static ByteUnit Gigabyte { get; } = new ByteUnit("GB", UnitSize * UnitSize * UnitSize);
     public static ByteUnit Terabyte { get; } = new ByteUnit("TB", UnitSize * UnitSize * UnitSize * UnitSize);
-
-    public static ByteUnit[] All = [Byte, Kilobyte, Megabyte, Gigabyte, Terabyte];
+    public static ByteUnit[] All { get; } = [Byte, Kilobyte, Megabyte, Gigabyte, Terabyte];
 
     public ByteUnit(string symbol, long numberOfBytes)
     {
@@ -29,6 +30,8 @@ public class ByteUnit
     /// NumberOfBytes
     /// </summary>
     public long NumberOfBytes { get; }
+
+    long IUnit<ByteUnit>.NumberOfLowestElements => NumberOfBytes;
 
     public override string ToString()
     {

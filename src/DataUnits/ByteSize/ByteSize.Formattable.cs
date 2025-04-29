@@ -1,35 +1,12 @@
-﻿namespace DataUnits;
+﻿using DataUnits.Base;
+
+namespace DataUnits;
 
 public partial struct ByteSize : IFormattable
 {
     public string ToString(ByteUnit? unit, string? format = null, IFormatProvider? formatProvider = null)
     {
-        format ??= "0.###";
-
-        double value = Bytes;
-
-        if (unit == null)
-        {
-            unit = ByteUnit.Byte;
-
-            for (int i = 0; i < ByteUnit.All.Length; i++)
-            {
-                unit = ByteUnit.All[i];
-                double v = value / unit.NumberOfBytes;
-
-                if (Math.Abs(v) < ByteUnit.UnitSize)
-                {
-                    value = v;
-                    break;
-                }
-            }
-        }
-        else
-        {
-            value /= unit.NumberOfBytes;
-        }
-
-        return $"{value.ToString(format, formatProvider)} {unit.Symbol}";
+        return Formattable.ToString(this, unit, format, formatProvider);
     }
 
     public string ToString(string? format, IFormatProvider? formatProvider = null)

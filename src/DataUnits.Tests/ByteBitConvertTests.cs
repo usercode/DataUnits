@@ -2,7 +2,7 @@
 
 namespace DataUnits.Tests;
 
-public class BitRateTests
+public class ByteBitConvertTests
 {
     [Fact]
     public void CalculateBitRate()

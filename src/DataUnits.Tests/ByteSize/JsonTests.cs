@@ -1,7 +1,7 @@
 ﻿using Xunit;
 using System.Text.Json;
 
-namespace DataUnits.Tests;
+namespace DataUnits.Tests.ByteSizes;
 
 public class JsonTests
 {

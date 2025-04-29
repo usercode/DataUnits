@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace DataUnits.Tests;
+namespace DataUnits.Tests.ByteSizes;
 
 public class BaseTests
 {

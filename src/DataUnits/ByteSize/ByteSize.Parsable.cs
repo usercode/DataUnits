@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using DataUnits.Base;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
 namespace DataUnits;
@@ -10,45 +11,7 @@ public partial struct ByteSize : IParsable<ByteSize>
 
     public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out ByteSize result)
     {
-        if (s == null)
-        {
-            result = new ByteSize();
-
-            return false;
-        }
-
-        Match match = Regex().Match(s);
-
-        if (match.Success == false)
-        {
-            result = new ByteSize();
-
-            return false;
-        }
-
-        if (double.TryParse(match.Groups["value"].Value, provider, out double value) == false)
-        {
-            result = new ByteSize();
-
-            return false;
-        }
-
-        string symbol = match.Groups["symbol"].Value;
-
-        //calculate the byte value
-        for (int i = 0; i < ByteUnit.All.Length; i++)
-        {
-            if (string.Equals(symbol, ByteUnit.All[i].Symbol, StringComparison.OrdinalIgnoreCase))
-            {
-                value *= ByteUnit.All[i].NumberOfBytes;
-
-                break;
-            }
-        }
-
-        result = ByteSize.FromBytes((long)value);
-
-        return true;
+        return Parsable.TryParse<ByteSize, ByteUnit>(Regex(), s, provider, out result);
     }
 
     public static bool TryParse([NotNullWhen(true)] string? s, [MaybeNullWhen(false)] out ByteSize result)

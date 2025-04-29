@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+﻿using DataUnits.Base;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace DataUnits;
 
-internal class ByteSizeTypeConverter : TypeConverter
+internal class GenericTypeConverter<TElement> : TypeConverter
+    where TElement : struct, IElement<TElement>
 {
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
     {
@@ -15,7 +17,10 @@ internal class ByteSizeTypeConverter : TypeConverter
     {
         if (value is string stringValue)
         {
-            return ByteSize.Parse(stringValue, culture);
+            if (TElement.TryParse(stringValue, culture, out TElement result))
+            {
+                return result;
+            }
         }
 
         throw new Exception();
@@ -28,9 +33,9 @@ internal class ByteSizeTypeConverter : TypeConverter
 
     public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
-        if (value is ByteSize sizeValue)
+        if (value is TElement sizeValue)
         {
-            return sizeValue.ToString(culture);
+            return sizeValue.ToString(null, culture);
         }
 
         throw new Exception();

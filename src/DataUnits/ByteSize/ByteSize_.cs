@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
+﻿using DataUnits.Base;
+using System.ComponentModel;
 using System.Text.Json.Serialization;
 
 namespace DataUnits;
@@ -7,37 +7,41 @@ namespace DataUnits;
 /// <summary>
 /// Represents a byte size value.
 /// </summary>
-[JsonConverter(typeof(ByteSizeJsonConverter))]
-[TypeConverter(typeof(ByteSizeTypeConverter))]
-public readonly partial struct ByteSize
+[JsonConverter(typeof(GenericJsonConverter<ByteSize>))]
+[TypeConverter(typeof(GenericTypeConverter<ByteSize>))]
+public readonly partial struct ByteSize : IElement<ByteSize, ByteUnit>
 {
     private ByteSize(long bytes)
     {
         Bytes = bytes;
     }
 
+    long IElement<ByteSize>.Value => Bytes;
+
+    static ByteSize IElement<ByteSize>.Create(long value) => new ByteSize(value);
+    
     /// <summary>
     /// Gets the number of bytes.
     /// </summary>
     public long Bytes { get; }
 
     /// <summary>
-    /// Gets the number of kilobytes
+    /// Gets the number of kilobytes.
     /// </summary>
     public double Kilobytes => (double)Bytes / ByteUnit.Kilobyte.NumberOfBytes;
 
     /// <summary>
-    /// Gets the number of megabytes
+    /// Gets the number of megabytes.
     /// </summary>
     public double Megabytes => (double)Bytes / ByteUnit.Megabyte.NumberOfBytes;
 
     /// <summary>
-    /// Gets the number of gigabytes
+    /// Gets the number of gigabytes.
     /// </summary>
     public double Gigabytes => (double)Bytes / ByteUnit.Gigabyte.NumberOfBytes;
 
     /// <summary>
-    /// Gets the number of terabytes
+    /// Gets the number of terabytes.
     /// </summary>
     public double Terabytes => (double)Bytes / ByteUnit.Terabyte.NumberOfBytes;
 
@@ -79,5 +83,5 @@ public readonly partial struct ByteSize
     public override int GetHashCode()
     {
         return Bytes.GetHashCode();
-    }
+    }    
 }

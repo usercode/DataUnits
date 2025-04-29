@@ -1,8 +1,8 @@
 ﻿using Xunit;
 
-namespace DataUnits.Tests;
+namespace DataUnits.Tests.BitRates;
 
-public class BitRateOperatorTests
+public class OperatorTests
 {
     [Fact]
     public void ImplicitCast()

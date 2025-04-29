@@ -34,8 +34,4 @@
 		<None Include="..\..\logo.png" Pack="true" PackagePath="" />
 		<None Include="..\..\readme.md" Pack="true" PackagePath="" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Base\" />
-	</ItemGroup>
 </Project>
