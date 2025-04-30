@@ -4,7 +4,7 @@ internal static class Formattable
 {
     public static string ToString<TValue, TUnit>(TValue value, TUnit? unit, string? format = null, IFormatProvider? formatProvider = null)
         where TValue : struct, IValue<TValue, TUnit>
-        where TUnit : IUnit<TUnit>
+        where TUnit : class, IUnit<TUnit>
     {
         format ??= "0.###";
 

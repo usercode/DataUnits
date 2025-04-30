@@ -5,12 +5,12 @@ namespace DataUnits.Base;
 
 internal static partial class Parsable
 {
-    [GeneratedRegex(@"^\s*(?<value>-?[0-9]+(\p{P}[0-9]+)?)\s*(?<symbol>[a-z]{0,4})?\s*$", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^\s*(?<value>-?[0-9]+(\p{P}[0-9]+)?)\s*(?<symbol>[a-z]{0,4})\s*$", RegexOptions.IgnoreCase)]
     private static partial Regex Regex();
 
     public static bool TryParse<TValue, TUnit>([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out TValue value)
         where TValue : struct, IValue<TValue, TUnit>
-        where TUnit : IUnit<TUnit>
+        where TUnit : class, IUnit<TUnit>
     {
         if (s == null)
         {
@@ -28,24 +28,33 @@ internal static partial class Parsable
             return false;
         }
 
-        if (double.TryParse(match.Groups["value"].Value, provider, out double current) == false)
+        if (double.TryParse(match.Groups["value"].ValueSpan, provider, out double current) == false)
         {
             value = new TValue();
 
             return false;
         }
 
-        string symbol = match.Groups["symbol"].Value;
+        ReadOnlySpan<char> symbol = match.Groups["symbol"].ValueSpan;
 
-        TUnit? unit;
+        TUnit? unit = null;
 
-        if (string.IsNullOrEmpty(symbol))
+        if (symbol.Length == 0)
         {
+            //use base unit
             unit = TUnit.All[0];
         }
         else
         {
-            unit = TUnit.All.FirstOrDefault(x => string.Equals(symbol, x.Symbol, StringComparison.OrdinalIgnoreCase));
+            //find unit by symbol
+            for (int i = 0; i < TUnit.All.Length; i++)
+            {
+                if (symbol.Equals(TUnit.All[i].Symbol, StringComparison.OrdinalIgnoreCase))
+                {
+                    unit = TUnit.All[i];
+                    break;
+                }
+            }
 
             if (unit == null)
             {

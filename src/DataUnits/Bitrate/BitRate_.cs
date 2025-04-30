@@ -55,6 +55,11 @@ public readonly partial struct BitRate : IValue<BitRate, BitUnit>
         return new BitRate(BitsPerSecond + value.BitsPerSecond);
     }
 
+    public BitRate AddBits(long value)
+    {
+        return Add(BitRate.FromBits(value));
+    }
+
     public BitRate AddKilobits(double value)
     {
         return Add(BitRate.FromKilobits(value));

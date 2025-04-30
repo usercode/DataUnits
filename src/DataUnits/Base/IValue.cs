@@ -4,7 +4,7 @@ namespace DataUnits.Base;
 
 internal interface IValue<TValue, TUnit> : IValue<TValue>
     where TValue : struct, IValue<TValue, TUnit>
-    where TUnit : IUnit<TUnit>
+    where TUnit : class, IUnit<TUnit>
 {
 }
 
