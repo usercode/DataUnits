@@ -14,6 +14,7 @@ public class BitUnit : IUnit<BitUnit>
     public static BitUnit Gigabit { get; } = new BitUnit("Gbps", UnitSize * UnitSize * UnitSize);
     public static BitUnit Terabit { get; } = new BitUnit("Tbps", UnitSize * UnitSize * UnitSize * UnitSize);
     public static BitUnit[] All { get; } = [Bit, Kilobit, Megabit, Gigabit, Terabit];
+    public static BitUnit BaseUnit => Bit;
 
     public BitUnit(string symbol, long numberOfBits)
     {
@@ -31,7 +32,7 @@ public class BitUnit : IUnit<BitUnit>
     /// </summary>
     public long NumberOfBits { get; }   
 
-    long IUnit<BitUnit>.NumberOfLowestValue => NumberOfBits;
+    long IUnit<BitUnit>.NumberOfLowestValue => NumberOfBits;    
 
     public override string ToString()
     {

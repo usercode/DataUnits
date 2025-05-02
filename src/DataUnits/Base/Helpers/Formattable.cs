@@ -6,13 +6,11 @@ internal static class Formattable
         where TValue : struct, IValue<TValue, TUnit>
         where TUnit : class, IUnit<TUnit>
     {
-        format ??= "0.###";
-
         double current = value.Value;
 
         if (unit == null)
         {
-            unit = TUnit.All[0];
+            unit = TUnit.BaseUnit;
 
             for (int i = 0; i < TUnit.All.Length; i++)
             {
@@ -30,6 +28,8 @@ internal static class Formattable
         {
             current /= unit.NumberOfLowestValue;
         }
+
+        format ??= "###,###,###,###,##0.###";
 
         return $"{current.ToString(format, formatProvider)} {unit.Symbol}";
     }

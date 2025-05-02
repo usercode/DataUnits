@@ -9,6 +9,7 @@ public class FormattableTests
     public void Integer()
     {
         Assert.Equal("123 bps", BitRate.FromBits(123).ToString(CultureInfo.InvariantCulture));
+        Assert.Equal("1.001 Kbps", BitRate.FromBits(1001).ToString(CultureInfo.InvariantCulture));
         Assert.Equal("123 Kbps", BitRate.FromKilobits(123).ToString(CultureInfo.InvariantCulture));
         Assert.Equal("123 Mbps", BitRate.FromMegabits(123).ToString(CultureInfo.InvariantCulture));
         Assert.Equal("123 Gbps", BitRate.FromGigabits(123).ToString(CultureInfo.InvariantCulture));
@@ -25,6 +26,6 @@ public class FormattableTests
     [Fact]
     public void ExplicitUnit()
     {        
-        Assert.Equal("1000 Kbps", BitRate.FromMegabits(1).ToString(BitUnit.Kilobit, null, CultureInfo.InvariantCulture));
+        Assert.Equal("1,000 Kbps", BitRate.FromMegabits(1).ToString(BitUnit.Kilobit, null, CultureInfo.InvariantCulture));
     }
 }

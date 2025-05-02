@@ -9,7 +9,7 @@ public class FormattableTests
     public void Integer()
     {
         Assert.Equal("123 B", ByteSize.FromBytes(123).ToString(CultureInfo.InvariantCulture));
-        Assert.Equal("1001 B", ByteSize.FromBytes(1001).ToString(CultureInfo.InvariantCulture));
+        Assert.Equal("1,001 B", ByteSize.FromBytes(1001).ToString(CultureInfo.InvariantCulture));
         Assert.Equal("123 KB", ByteSize.FromKilobytes(123).ToString(CultureInfo.InvariantCulture));
         Assert.Equal("123 MB", ByteSize.FromMegabytes(123).ToString(CultureInfo.InvariantCulture));
         Assert.Equal("123 GB", ByteSize.FromGigabytes(123).ToString(CultureInfo.InvariantCulture));
@@ -28,6 +28,6 @@ public class FormattableTests
     [Fact]
     public void ExplicitUnit()
     {
-        Assert.Equal("1024 KB", ByteSize.FromMegabytes(1).ToString(ByteUnit.Kilobyte, null, CultureInfo.InvariantCulture));
+        Assert.Equal("1,024 KB", ByteSize.FromMegabytes(1).ToString(ByteUnit.Kilobyte, null, CultureInfo.InvariantCulture));
     }
 }

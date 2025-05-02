@@ -6,4 +6,5 @@ internal interface IUnit<T> where T : class, IUnit<T>
     public long NumberOfLowestValue { get; }
     public abstract static long UnitSize { get; }
     public abstract static T[] All { get; }
+    public abstract static T BaseUnit { get; }
 }

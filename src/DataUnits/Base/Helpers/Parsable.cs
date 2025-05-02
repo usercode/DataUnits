@@ -42,7 +42,7 @@ internal static partial class Parsable
         if (symbol.Length == 0)
         {
             //use base unit
-            unit = TUnit.All[0];
+            unit = TUnit.BaseUnit;
         }
         else
         {

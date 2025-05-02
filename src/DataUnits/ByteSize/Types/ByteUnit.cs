@@ -14,6 +14,7 @@ public class ByteUnit : IUnit<ByteUnit>
     public static ByteUnit Gigabyte { get; } = new ByteUnit("GB", UnitSize * UnitSize * UnitSize);
     public static ByteUnit Terabyte { get; } = new ByteUnit("TB", UnitSize * UnitSize * UnitSize * UnitSize);
     public static ByteUnit[] All { get; } = [Byte, Kilobyte, Megabyte, Gigabyte, Terabyte];
+    public static ByteUnit BaseUnit => Byte;
 
     public ByteUnit(string symbol, long numberOfBytes)
     {
