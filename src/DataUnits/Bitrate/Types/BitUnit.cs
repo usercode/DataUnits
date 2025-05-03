@@ -16,10 +16,10 @@ public class BitUnit : IUnit<BitUnit>
     public static BitUnit[] All { get; } = [Bit, Kilobit, Megabit, Gigabit, Terabit];
     public static BitUnit BaseUnit => Bit;
 
-    public BitUnit(string symbol, long numberOfBits)
+    public BitUnit(string symbol, long bits)
     {
         Symbol = symbol;
-        NumberOfBits = numberOfBits;
+        Bits = bits;
     }
 
     /// <summary>
@@ -28,14 +28,14 @@ public class BitUnit : IUnit<BitUnit>
     public string Symbol { get; }
 
     /// <summary>
-    /// NumberOfBits
+    /// Bits
     /// </summary>
-    public long NumberOfBits { get; }   
+    public long Bits { get; }   
 
-    long IUnit<BitUnit>.NumberOfLowestValue => NumberOfBits;    
+    long IUnit<BitUnit>.LowestValue => Bits;
 
     public override string ToString()
     {
-        return $"{Symbol} ({NumberOfBits} bps)";
+        return $"{Symbol} ({Bits} bps)";
     }
 }

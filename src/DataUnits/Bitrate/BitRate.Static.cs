@@ -4,7 +4,7 @@ public partial struct BitRate
 {
     public static BitRate From(double value, BitUnit unit)
     {
-        return new BitRate((long)(value * unit.NumberOfBits));
+        return new BitRate((long)(value * unit.Bits));
     }
 
     public static BitRate FromBits(long bits)

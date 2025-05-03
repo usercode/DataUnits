@@ -64,7 +64,7 @@ internal static partial class Parsable
             }
         }
 
-        current *= unit.NumberOfLowestValue;
+        current *= unit.LowestValue;
 
         value = TValue.Create((long)current);
 

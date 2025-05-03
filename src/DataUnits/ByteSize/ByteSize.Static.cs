@@ -4,7 +4,7 @@ public partial struct ByteSize
 {
     public static ByteSize From(double value, ByteUnit unit)
     {
-        return FromBytes((long)(value * unit.NumberOfBytes));
+        return FromBytes((long)(value * unit.Bytes));
     }
 
     public static ByteSize FromBytes(long value)

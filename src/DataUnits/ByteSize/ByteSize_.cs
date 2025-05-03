@@ -28,22 +28,22 @@ public readonly partial struct ByteSize : IValue<ByteSize, ByteUnit>
     /// <summary>
     /// Gets the number of kilobytes.
     /// </summary>
-    public double Kilobytes => (double)Bytes / ByteUnit.Kilobyte.NumberOfBytes;
+    public double Kilobytes => (double)Bytes / ByteUnit.Kilobyte.Bytes;
 
     /// <summary>
     /// Gets the number of megabytes.
     /// </summary>
-    public double Megabytes => (double)Bytes / ByteUnit.Megabyte.NumberOfBytes;
+    public double Megabytes => (double)Bytes / ByteUnit.Megabyte.Bytes;
 
     /// <summary>
     /// Gets the number of gigabytes.
     /// </summary>
-    public double Gigabytes => (double)Bytes / ByteUnit.Gigabyte.NumberOfBytes;
+    public double Gigabytes => (double)Bytes / ByteUnit.Gigabyte.Bytes;
 
     /// <summary>
     /// Gets the number of terabytes.
     /// </summary>
-    public double Terabytes => (double)Bytes / ByteUnit.Terabyte.NumberOfBytes;
+    public double Terabytes => (double)Bytes / ByteUnit.Terabyte.Bytes;
 
     public ByteSize Add(ByteSize value)
     {

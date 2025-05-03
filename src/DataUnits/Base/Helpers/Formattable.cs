@@ -15,7 +15,7 @@ internal static class Formattable
             for (int i = 0; i < TUnit.All.Length; i++)
             {
                 unit = TUnit.All[i];
-                double v = current / unit.NumberOfLowestValue;
+                double v = current / unit.LowestValue;
 
                 if (Math.Abs(v) < TUnit.UnitSize)
                 {
@@ -26,7 +26,7 @@ internal static class Formattable
         }
         else
         {
-            current /= unit.NumberOfLowestValue;
+            current /= unit.LowestValue;
         }
 
         format ??= "###,###,###,###,##0.###";

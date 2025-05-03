@@ -16,10 +16,10 @@ public class ByteUnit : IUnit<ByteUnit>
     public static ByteUnit[] All { get; } = [Byte, Kilobyte, Megabyte, Gigabyte, Terabyte];
     public static ByteUnit BaseUnit => Byte;
 
-    public ByteUnit(string symbol, long numberOfBytes)
+    public ByteUnit(string symbol, long bytes)
     {
         Symbol = symbol;
-        NumberOfBytes = numberOfBytes;
+        Bytes = bytes;
     }
 
     /// <summary>
@@ -28,14 +28,14 @@ public class ByteUnit : IUnit<ByteUnit>
     public string Symbol { get; }
 
     /// <summary>
-    /// NumberOfBytes
+    /// Bytes
     /// </summary>
-    public long NumberOfBytes { get; }
+    public long Bytes { get; }
 
-    long IUnit<ByteUnit>.NumberOfLowestValue => NumberOfBytes;
+    long IUnit<ByteUnit>.LowestValue => Bytes;
 
     public override string ToString()
     {
-        return $"{Symbol} ({NumberOfBytes} bytes)";
+        return $"{Symbol} ({Bytes} bytes)";
     }
 }

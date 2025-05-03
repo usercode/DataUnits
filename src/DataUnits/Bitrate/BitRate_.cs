@@ -28,22 +28,22 @@ public readonly partial struct BitRate : IValue<BitRate, BitUnit>
     /// <summary>
     /// Gets the number of kilobits.
     /// </summary>
-    public double Kilobits => (double)BitsPerSecond / BitUnit.Kilobit.NumberOfBits;
+    public double Kilobits => (double)BitsPerSecond / BitUnit.Kilobit.Bits;
 
     /// <summary>
     /// Gets the number of megabits.
     /// </summary>
-    public double Megabits => (double)BitsPerSecond / BitUnit.Megabit.NumberOfBits;
+    public double Megabits => (double)BitsPerSecond / BitUnit.Megabit.Bits;
 
     /// <summary>
     /// Gets the number of gigabits.
     /// </summary>
-    public double Gigabits => (double)BitsPerSecond / BitUnit.Gigabit.NumberOfBits;
+    public double Gigabits => (double)BitsPerSecond / BitUnit.Gigabit.Bits;
 
     /// <summary>
     /// Gets the number of terabits.
     /// </summary>
-    public double Terabits => (double)BitsPerSecond / BitUnit.Terabit.NumberOfBits;
+    public double Terabits => (double)BitsPerSecond / BitUnit.Terabit.Bits;
 
     public override int GetHashCode()
     {
