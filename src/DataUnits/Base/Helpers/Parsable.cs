@@ -5,7 +5,7 @@ namespace DataUnits.Base;
 
 internal static partial class Parsable
 {
-    [GeneratedRegex(@"^\s*(?<value>-?[0-9]+(\p{P}[0-9]+)?)\s*(?<symbol>[a-z]{0,4})\s*$", RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^\s*(?<value>[+-]?[0-9.,]+)\s*(?<symbol>[a-z]{0,4})\s*$", RegexOptions.IgnoreCase)]
     private static partial Regex Regex();
 
     public static bool TryParse<TValue, TUnit>([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out TValue value)

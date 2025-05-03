@@ -46,6 +46,12 @@ public class ParsingTests
     }
 
     [Fact]
+    public void GroupingSeparator()
+    {
+        Assert.Equal(1049088, ByteSize.Parse("1,024.5 KB", CultureInfo.InvariantCulture).Bytes);
+    }
+
+    [Fact]
     public void ParseFloatValue()
     {
         ByteSize.TryParse("1.5 KB", CultureInfo.InvariantCulture, out ByteSize result);
@@ -72,6 +78,12 @@ public class ParsingTests
     [Fact]
     public void NegativeValue()
     {
-        Assert.Equal(-1024, ByteSize.Parse("-1 KB").Bytes);
+        Assert.Equal(-1024, ByteSize.Parse("-1 KB", CultureInfo.InvariantCulture).Bytes);
+    }
+
+    [Fact]
+    public void PositiveValue()
+    {
+        Assert.Equal(1024, ByteSize.Parse("+1 KB", CultureInfo.InvariantCulture).Bytes);
     }
 }

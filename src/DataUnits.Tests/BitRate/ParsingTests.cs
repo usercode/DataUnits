@@ -72,6 +72,12 @@ public class ParsingTests
     [Fact]
     public void NegativeValue()
     {
-        Assert.Equal(-1000, BitRate.Parse("-1 Kbps").BitsPerSecond);
+        Assert.Equal(-1000, BitRate.Parse("-1 Kbps", CultureInfo.InvariantCulture).BitsPerSecond);
+    }
+
+    [Fact]
+    public void PositiveValue()
+    {
+        Assert.Equal(1000, BitRate.Parse("+1 Kbps", CultureInfo.InvariantCulture).BitsPerSecond);
     }
 }
