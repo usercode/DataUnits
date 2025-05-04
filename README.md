@@ -25,7 +25,7 @@ TimeSpan time = ByteSize.FromBytes(1) / BitRate.FromBits(4); //2
 ByteSize byteSize = BitRate.FromBits(8) * TimeSpan.FromSeconds(2); //2
 ```
 
-### Parsing 
+### Parsable 
 ```c#
 ByteSize bytes = ByteSize.Parse("1"); //if no size is specified, byte is used
 ByteSize bytes = ByteSize.Parse("1 B");
@@ -50,7 +50,7 @@ bool result = ByteSize.FromBytes(1024) == ByteSize.FromKilobytes(1);
 bool result = ByteSize.FromBytes(100) > ByteSize.FromKilobytes(1);
 ```
 
-### Operators
+### Implicit operators
 ```c#
 long value = ByteSize.FromBytes(1024); //returns byte value
 
