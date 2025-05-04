@@ -6,7 +6,7 @@ DataUnits allows easier handling of byte size representation. (Bytes, KB, MB, GB
 
 ## How to use it
 
-You can create a `ByteSize` object from Bits, bytes, kilobytes, megabytes, gigabytes and terabytes.
+You can create a `ByteSize` object from bits, bytes, kilobytes, megabytes, gigabytes and terabytes.
 
 - JsonConverter and TypeConverter are already available.
 
